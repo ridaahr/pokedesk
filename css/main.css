@@ -39,8 +39,13 @@ ul {
 
 button {
     background-color: transparent;
-    border: 0;
-    border-radius: 0;
+    font-size: 16px;
+    position: relative;
+    margin: auto;
+    padding: 1em 2.5em 1em 2.5em;
+    border: none;
+    transition: all 0.1s linear;
+    box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
 }
 
 /* Aquí todo el CSS extra */
@@ -112,14 +117,66 @@ main {
 }
 
 .pokemon {
-    border-radius: 1rem;
-    background-color: var(--clr-white);
-    box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, .25);
-    padding-block: 1rem;
-    text-transform: uppercase;
     position: relative;
-    isolation: isolate;
-    overflow: hidden;
+    width: 190px;
+    height: 290px; 
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.pokemon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  margin: auto;
+  width: 200px;
+  height: 264px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pokemon::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+}
+
+.heading {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.pokemon p:not(.heading) {
+  font-size: 14px;
+}
+
+.pokemon p:last-child {
+  color: #e81cff;
+  font-weight: 600;
+}
+
+.pokemon:hover::after {
+  filter: blur(30px);
+}
+
+.pokemon:hover::before {
+  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
 }
 
 .pokemon-id-back {
@@ -134,14 +191,15 @@ main {
 }
 
 .pokemon-imagen {
-    padding-inline: 1rem;
     display: flex;
+    align-items: center;
     justify-content: center;
+    flex: 1;
 }
 
 .pokemon-imagen img {
-    width: 100%;
-    max-width: 6rem;
+    max-height: 100px; 
+    object-fit: contain;
 }
 
 .pokemon-info {
